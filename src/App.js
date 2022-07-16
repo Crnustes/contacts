@@ -7,11 +7,12 @@ import ContactList from "./components/contactos/List/ContactList";
 import AddContact from "./components/contactos/Agregar/AddContact";
 import ViewContact from "./components/contactos/Ver/ViewContact";
 import EditContact from "./components/contactos/Editar/EditContact";
+import Spinner from "./components/Spinner/Spinner";
 
 let App = () => {
   return (
     <React.Fragment>
-     
+       
       <NavBar/>
        
       <Routes>

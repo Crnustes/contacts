@@ -1,0 +1,23 @@
+{
+    "contacts" :[
+        {
+            "id": "001",
+            "name": "Cristian Ñustes",
+            "photo": "https://cdn-icons-png.flaticon.com/512/1361/1361728.png",
+            "mobile": "3154153343",
+            "email": "cristiannustesm@gmail.com",
+            "birthday": "21/12/1990",
+            "address": "cl 25sur"
+        },
+        {
+            "id": "002",
+            "name": "Andrea Rodriguez",
+            "photo": "https://cdn-icons-png.flaticon.com/512/1361/1361728.png",
+            "mobile": "3178047777",
+            "email": "andrea@gmail.com",
+            "birthday": "03/11/1989",
+            "address": "cl 25sur"
+        }
+        
+    ]
+}

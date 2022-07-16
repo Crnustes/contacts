@@ -5,6 +5,7 @@ import {ContactService} from "../../../services/ContactService";
 import Spinner from "../../Spinner/Spinner.js";
 
 
+
 let ContactList = () => {
 
   let[state , setState] = useState({
@@ -42,7 +43,7 @@ let ContactList = () => {
 
   return (
     <React.Fragment>
-    <pre>{JSON.stringify(contacts)}</pre>
+   
 
     <section>
       <div className="contact-search p-5" >
@@ -114,12 +115,7 @@ let ContactList = () => {
                                   Fecha de Nacimiento: <span className="fw-bold">{contact.birthday}</span>
                                 </li>
                                 <li className="list-group-item list-group-item-action">
-                                  Edad: <span className="fw-bold">
-                                     
-
-                                    
                                   
-                                  </span>
                                 </li>
                                 <li className="list-group-item list-group-item-action">
                                   Direccion: <span className="fw-bold">{contact.address}</span>
@@ -130,9 +126,9 @@ let ContactList = () => {
                               </ul>
                             </div>
                             <div className="col-md-2  d-flex flex-column align-item-center">
-                              <Link to={'/contactos/Ver/:contactoId'} className="btn btn-warning my-1" ><i className="fa fa-eye"/></Link>
-                              <Link to={'/contactos/Editar/:contactoId'} className="btn btn-primary my-1"><i className="fa fa-pen"/></Link>
-                              <Link to={'/contactos/Ver/:contactoId'} className="btn btn-danger my-1"><i className="fa fa-trash"/></Link>
+                              <Link to={`/contactos/Ver/${contact.id}`} className="btn btn-warning my-1" ><i className="fa fa-eye"/></Link>
+                              <Link to={`/contactos/Editar/${contact.id}`} className="btn btn-primary my-1"><i className="fa fa-pen"/></Link>
+                              <Link to={`/contactos/Ver/${contact.id}`} className="btn btn-danger my-1"><i className="fa fa-trash"/></Link>
                             </div>
                           </div>
                         </div>

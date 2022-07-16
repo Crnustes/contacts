@@ -7,7 +7,7 @@ import ContactList from "./components/contactos/List/ContactList";
 import AddContact from "./components/contactos/Agregar/AddContact";
 import ViewContact from "./components/contactos/Ver/ViewContact";
 import EditContact from "./components/contactos/Editar/EditContact";
-import Spinner from "./components/Spinner/Spinner";
+
 
 let App = () => {
   return (
@@ -19,7 +19,7 @@ let App = () => {
         <Route path={'/'} element={<Navigate to={'/contactos/list'} />} />
         <Route path={'/contactos/list'} element={<ContactList/>} />
         <Route path={'/contactos/Agregar'} element={<AddContact/>} />
-        <Route path={'/contactos/Ver/:contactoId'} element={<ViewContact/>} />
+        <Route path={'/contactos/Ver/:contactId'} element={<ViewContact/>} />
         <Route path={'/contactos/Editar/:contactId'} element={<EditContact/>} />
       
       </Routes>

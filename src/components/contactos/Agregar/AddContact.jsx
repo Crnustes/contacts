@@ -34,9 +34,7 @@ const AddContact = () => {
   };
 
    let submitForm = async (event) => {
-
     event.preventDefault();
-
     try{
       let response = await ContactService.createContact(state.contact);
       if(response){
@@ -48,7 +46,6 @@ const AddContact = () => {
       navigate('/contactos/add', {remplace: false});
 
     }
-
   };
 
   let {loading, contact , errorMessage} = state;

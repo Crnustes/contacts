@@ -83,7 +83,7 @@ let ViewContact = () => {
                       Direccion: <span className="fw-bold">{contact.address}</span>
                     </li>
                     <li className="list-group-item list-group-item-action">
-                      Correo: <span className="fw-bold">{contact.mail}</span>
+                      Correo: <span className="fw-bold">{contact.email}</span>
                     </li>
                   </ul>
                 </div>

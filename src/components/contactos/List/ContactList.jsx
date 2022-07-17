@@ -8,9 +8,14 @@ import Spinner from "../../Spinner/Spinner.js";
 
 let ContactList = () => {
 
+  let [query, setQuery]= useState({
+    text : ''
+  });
+
   let[state , setState] = useState({
     loading : false,
     contacts : [],
+    filteredContacts: [], 
     errorMessage : ''
 
   });
@@ -22,7 +27,8 @@ let ContactList = () => {
       setState({
         ...state,
         loading: false,
-        contacts: response.data
+        contacts: response.data,
+        filteredContacts : response.data
 
       });
     }
@@ -38,8 +44,48 @@ let ContactList = () => {
   useEffect(() => {
     GetUserData();
   }, []);
+
+  //Borrar contactos
+
+  let clickDelete = async (contactId) => {
+    try{
+      let response = await ContactService.deleteContact(contactId);
+      if(response){
+        setState({...state, loading: true});
+        let response = await ContactService.getAllContacts();
+        setState({
+          ...state,
+          loading: false,
+          contacts: response.data,
+          filteredContacts : response.data
+  
+        });
+
+      }
+
+    }
+    catch(error){
+      setState({
+        ...state,
+        loading: false,
+        errorMessage: error.message
+      });
+    }
+  } 
+  // Buscador de contactos
+    let searchContacts =(event) =>{
+    setQuery({...query, text: event.target.value});
+    let theContacts = state.contacts.filter(contact =>{
+      return contact.email.toLowerCase().includes(event.target.value.toLowerCase())
+    });
+    setState({
+      ...state,
+      filteredContacts: theContacts
+    })
+  };
+
  
-  let {loading, contacts , errorMessage} = state;
+  let {loading, contacts , filteredContacts, errorMessage} = state;
 
   return (
     <React.Fragment>
@@ -68,12 +114,15 @@ let ContactList = () => {
                 <form className="row" >
                   <div className="col">
                     <div className="mb-2">
-                      <input type="text" name="" id="" className="form-control" placeholder="Escribe el nombre" />
+                      <input name="text"
+                      value = {query.text}
+                      onChange = {searchContacts} 
+                      className="form-control" placeholder="Escribe el nombre" />
                     </div>
                   </div>
                   <div className="col">
                     <div className="mb-2">
-                      <input type="submit" name="" id="" className="btn btn.outline-dark" value="Buscar" />
+                      <input type="submit" className="btn btn.outline-dark" value="Buscar" />
                     </div>
                   </div>
                 </form>
@@ -92,8 +141,8 @@ let ContactList = () => {
         <div className="container">
           <div className="row">
              {
-              contacts.length > 0 &&
-                contacts.map( contact => {
+              filteredContacts.length > 0 &&
+              filteredContacts.map( contact => {
                   return (
                       
                     <div className="col-md-6" key={contact.id}>
@@ -128,7 +177,7 @@ let ContactList = () => {
                             <div className="col-md-2  d-flex flex-column align-item-center">
                               <Link to={`/contactos/Ver/${contact.id}`} className="btn btn-warning my-1" ><i className="fa fa-eye"/></Link>
                               <Link to={`/contactos/Editar/${contact.id}`} className="btn btn-primary my-1"><i className="fa fa-pen"/></Link>
-                              <Link to={`/contactos/Ver/${contact.id}`} className="btn btn-danger my-1"><i className="fa fa-trash"/></Link>
+                              <button className="btn btn-danger my-1" onClick={() => clickDelete(contact.id)} ><i className="fa fa-trash"/></button>
                             </div>
                           </div>
                         </div>

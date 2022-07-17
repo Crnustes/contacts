@@ -5,13 +5,13 @@ body{
 }
 
 .img-contact{
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: auto;
     border-radius: 50%;
 }
 
 .img-contact-view{
     width: 250px;
-    height: 250px;
+    height: auto;
     border-radius: 50%;
 }

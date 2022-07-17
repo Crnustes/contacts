@@ -3,13 +3,13 @@ import { Link , useParams } from "react-router-dom";
 import {ContactService} from "../../../services/ContactService";
 import Spinner from "../../Spinner/Spinner.js";
 
-const ViewContact = () => {
+let ViewContact = () => {
    
   let {contactId} = useParams();
 
   let[state , setState] = useState({
     loading : false,
-    contacts : [],
+    contact : [],
     errorMessage : ''
 
   });
@@ -21,7 +21,7 @@ const ViewContact = () => {
       setState({
         ...state,
         loading: false,
-        contacts: response.data
+        contact: response.data
 
       });
     }
@@ -38,7 +38,7 @@ const ViewContact = () => {
     GetUserData();
   }, []);
  
-  let {loading, contacts , errorMessage} = state;
+  let {loading, contact , errorMessage} = state;
 
   return (
 
@@ -63,27 +63,27 @@ const ViewContact = () => {
             <div className="container">
               <div className="row">
                 <div className="col-md-4">
-                  <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" className="img-fluid img-contact-view" alt=""  />
+                  <img src={contact.photo} className="img-fluid img-contact-view" alt=""  />
                 </div>
                 <div className="col-md-7">
                   <ul className="list-group">
                     <li className="list-group-item list-group-item-action">
-                      Nombre: <span className="fw-bold">Cristian Ñustes</span>
+                      Nombre: <span className="fw-bold">{contact.name}</span>
                     </li>
                     <li className="list-group-item list-group-item-action">
-                      Teléfono: <span className="fw-bold">3154153343</span>
+                      Teléfono: <span className="fw-bold">{contact.mobile}</span>
                     </li>
                     <li className="list-group-item list-group-item-action">
-                      Fecha de Nacimiento: <span className="fw-bold">21/12/1990</span>
+                      Fecha de Nacimiento: <span className="fw-bold">{contact.birthday}</span>
                     </li>
                     <li className="list-group-item list-group-item-action">
                       Edad: <span className="fw-bold">31</span>
                     </li>
                     <li className="list-group-item list-group-item-action">
-                      Direccion: <span className="fw-bold">Cl 25sur</span>
+                      Direccion: <span className="fw-bold">{contact.address}</span>
                     </li>
                     <li className="list-group-item list-group-item-action">
-                      Correo: <span className="fw-bold">Cristian@gmail.com</span>
+                      Correo: <span className="fw-bold">{contact.mail}</span>
                     </li>
                   </ul>
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Routes , Route , Navigate , Switch} from "react-router-dom";
+import {Routes , Route , Navigate } from "react-router-dom";
 
 import NavBar from "./components/Nav/NavBar";
 import ContactList from "./components/contactos/List/ContactList";

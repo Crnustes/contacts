@@ -1,9 +1,78 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import { Link , useParams } from "react-router-dom";
+import {ContactService} from "../../../services/ContactService";
 
-const Editar = () => {
+let EditContact = () => {
+
+
+  let {contactId} = useParams();
+
+  let[state , setState] = useState({
+    loading : false,
+    contacts : {
+      name: '',
+      photo: '',
+      mobile: '',
+      email: '',
+      birthday:'',
+      address: ''
+
+    },
+    errorMessage : ''
+
+  });
+  useEffect ( async () => {
+    try{
+      setState({...state, loading:true});
+      let response = await ContactService.getContact(contactId);
+      setState({
+        ...state,
+        loading: false,
+        contact: response.data
+      });
+    }
+      catch (error) {
+        setState({
+          ...state,
+        loading:false,
+        errorMesssage: error
+
+        });
+      }
+    }, [contactId]);
+
+  /*let GetUserData = async () =>{
+    try{
+      setState({...state, loading: true});
+      let response = await ContactService.getContacts(contactId);
+      setState({
+        ...state,
+        loading: false,
+        contacts: response.data
+
+      });
+    }
+    catch(error){
+      setState({
+        ...state,
+        loading: false,
+        errorMessage: error.message
+      });
+      
+    }
+  };
+  useEffect(() => {
+    GetUserData();
+  }, [contactId]);*/
+
+ 
+
+  let {loading, contacts , errorMessage} = state;
+
+
   return (
     <React.Fragment>
+      <pre> {JSON.stringify(contacts)} </pre>
       <section className="add-contact p-4" >
         <div className="container">
           <div className="row">
@@ -40,7 +109,7 @@ const Editar = () => {
               </form>
             </div>
             <div className="col-md-5">
-              <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" className="img-fluid img-contact" alt="" srcset="" />
+              <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" className="img-fluid img-contact" alt=""  />
             </div>
           </div>
         </div>
@@ -49,4 +118,4 @@ const Editar = () => {
   )
 }
 
-export default Editar
+export default EditContact
